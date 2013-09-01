@@ -1,0 +1,17 @@
+collective.academicprogrammes Installation
+------------------------------------------
+
+To install collective.academicprogrammes using zc.buildout and the plone.recipe.zope2instance
+recipe to manage your project, you can do this:
+
+* Add ``collective.academicprogrammes`` to the list of eggs to install, e.g.:
+
+    [buildout]
+    ...
+    eggs =
+        ...
+        collective.academicprogrammes
+       
+* Re-run buildout, e.g. with:
+
+    $ ./bin/buildout
