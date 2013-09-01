@@ -26,7 +26,7 @@ setup(name='collective.academicprogrammes',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'plone.app.dexterity [grok]',
+          'plone.app.dexterity [grok,relations]',
           'plone.namedfile [blobs]',
           # -*- Extra requirements: -*-
       ],
