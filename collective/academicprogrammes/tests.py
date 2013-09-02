@@ -52,6 +52,14 @@ def test_suite():
 
         # -*- extra stuff goes here -*-
 
+        # Integration tests for CourseGroup
+        ztc.ZopeDocFileSuite(
+            'CourseGroup.txt',
+            package='collective.academicprogrammes',
+            optionflags = OPTION_FLAGS,
+            test_class=TestCase),
+
+
         # Integration tests for Programme
         ztc.ZopeDocFileSuite(
             'Programme.txt',

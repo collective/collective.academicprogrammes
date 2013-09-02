@@ -3,14 +3,17 @@
     <field name="details" type="plone.app.textfield.RichText">
       <description>Details about the programme</description>
       <title>Details</title>
+      <required>False</required>
     </field>
     <field name="image" type="plone.namedfile.field.NamedBlobImage">
       <description>summary image for the programme</description>
       <title>Image</title>
+      <required>False</required>
     </field>
     <field name="image_caption" type="zope.schema.TextLine">
       <description/>
       <title>Image Caption</title>
+      <required>False</required>
     </field>
   </schema>
 </model>

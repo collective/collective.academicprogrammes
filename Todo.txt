@@ -1,0 +1,5 @@
+- [x] - Create content types programme and course
+- [x] - programmes should be able to aggregate courses
+- [.] - courses should know their prerequisites
+- [ ] - create custom layout for programme
+- [ ] - create custom layout for course 

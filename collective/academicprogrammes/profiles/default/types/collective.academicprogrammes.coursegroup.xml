@@ -1,25 +1,25 @@
 <?xml version="1.0"?>
-<object name="collective.academicprogrammes.course"
+<object name="collective.academicprogrammes.coursegroup"
    meta_type="Dexterity FTI"
    i18n:domain="collective.academicprogrammes" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Basic metadata -->
-  <property name="title" i18n:translate="">Course</property>
+  <property name="title" i18n:translate="">Course Group</property>
   <property name="description"
-    i18n:translate="">Course</property>
-  <property name="icon_expr">string:${portal_url}/++resource++collective.academicprogrammes/course.png</property>
-  <property name="factory">collective.academicprogrammes.course</property>
+    i18n:translate="">A Course Grouping</property>
+  <property name="icon_expr">string:${portal_url}/++resource++collective.academicprogrammes/coursegroup.png</property>
+  <property name="factory">collective.academicprogrammes.coursegroup</property>
   <property name="global_allow">True</property>
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types" />
   <property name="allow_discussion">False</property>
 
   <!-- schema and class used for content items -->
-  <property name="schema">collective.academicprogrammes.course.ICourse</property>
-  <property name="klass">collective.academicprogrammes.course.Course</property>
+  <property name="schema">collective.academicprogrammes.course_group.ICourseGroup</property>
+  <property name="klass">collective.academicprogrammes.course_group.CourseGroup</property>
 
   <property name="behaviors">
-     <element value="collective.academicprogrammes.behaviors.INameFromCourseCodeAndTitle" />
+     <element value="plone.app.content.interfaces.INameFromTitle" />
      <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
    </property>
 

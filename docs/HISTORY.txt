@@ -1,6 +1,22 @@
 Changelog
 =========
 
+1.0a
+--------------------
+
+- Added programme and course content type
+
+- programme can reference courses
+
+- courses reference other courses as prerequisites
+
+- added custom content type course group
+
+- created custom view for courses
+
+- added custom icons for course, programme and course groups
+
+
 1.0adev (unreleased)
 --------------------
 

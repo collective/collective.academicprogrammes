@@ -33,5 +33,16 @@
       />
 
   <!-- -*- extra stuff goes here -*- -->
+  <plone:behavior
 
+    title="Name from course code and title"
+    description="generates a name from course code and title attributes"
+    for="collective.academicprogrammes.course.ICourse"
+    provides=".behaviors.INameFromCourseCodeAndTitle"
+    />
+
+    <adapter for="collective.academicprogrammes.course.ICourse"
+             factory=".behaviors.NameFromCourseCodeAndTitle"
+             provides=".behaviors.INameFromCourseCodeAndTitle" />
+             
 </configure>

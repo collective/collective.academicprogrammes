@@ -1,5 +1,9 @@
 <model xmlns:security="http://namespaces.plone.org/supermodel/security" xmlns:marshal="http://namespaces.plone.org/supermodel/marshal" xmlns:form="http://namespaces.plone.org/supermodel/form" xmlns="http://namespaces.plone.org/supermodel/schema">
   <schema>
+    <field name="course_name" type="zope.schema.TextLine">
+      <description>course name</description>
+      <title>course name</title>
+    </field>
     <field name="course_code" type="zope.schema.TextLine">
       <description>course code</description>
       <title>course code</title>

@@ -1,5 +1,5 @@
 from five import grok
-
+from Acquisition import aq_inner
 from z3c.form import group, field
 from zope import schema
 from zope.interface import invariant, Invalid
@@ -10,34 +10,28 @@ from plone.dexterity.content import Item
 from plone.directives import dexterity, form
 from plone.namedfile.field import NamedImage, NamedFile
 from plone.namedfile.field import NamedBlobImage, NamedBlobFile
-from plone.namedfile.interfaces import IImageScaleTraversable
 
 from plone.app.textfield import RichText
 
-
 from collective.academicprogrammes import MessageFactory as _
+from collective.academicprogrammes.interfaces import IICourse
+from z3c.relationfield.schema import RelationList, RelationChoice
+from plone.formwidget.contenttree import ObjPathSourceBinder
+from collective.academicprogrammes.backref import back_references
 
 
-# Interface class; used to define content-type schema.
-
-class ICourse(form.Schema, IImageScaleTraversable):
+class ICourse(IICourse):
     """
-    Course
+    Course Profile
     """
 
-    # If you want a schema-defined interface, delete the model.load
-    # line below and delete the matching file in the models sub-directory.
-    # If you want a model-based interface, edit
-    # models/course.xml to define the content type.
-
-    form.model("models/course.xml")
-
-
-# Custom content-type class; objects created for this content type will
-# be instances of this class. Use this class to add content-type specific
-# methods and properties. Put methods that are mainly useful for rendering
-# in separate view classes.
-
+    prerequisites = RelationList(
+    title=u"Prerequisites",
+    default=[],
+    value_type=RelationChoice(title=_(u"Prerequisite"),
+                              source=ObjPathSourceBinder(object_provides=IICourse.__identifier__)),
+    required=False,
+)
 class Course(Item):
     grok.implements(ICourse)
 
@@ -54,12 +48,21 @@ class Course(Item):
 # of this type by uncommenting the grok.name line below or by
 # changing the view class name and template filename to View / view.pt.
 
-class SampleView(grok.View):
+class View(grok.View):
     """ sample view class """
 
     grok.context(ICourse)
     grok.require('zope2.View')
 
+    def semesters(self):
+        semester_list = list(self.context.semester)
+        semester_list.sort()
+        #semester_list.reverse()
+        return semester_list
     # grok.name('view')
 
     # Add view methods here
+    @property
+    def programme_refs(self):
+        context = aq_inner(self.context)
+        return back_references(self.context, 'courses')

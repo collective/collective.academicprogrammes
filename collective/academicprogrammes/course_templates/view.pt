@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="collective.academicprogrammes">
+<body>
+
+<metal:item fill-slot="content-title">
+
+       <h1><span tal:replace="context/course_name" />
+        </h1>
+
+</metal:item>
+<metal:item fill-slot="content-description">
+    <p><span tal:replace="context/Description"/></p>
+</metal:item>
+<metal:main fill-slot="content-core">
+        <h2>Course Code: <tal:code tal:content="context/course_code" />
+        </h2>
+        <h3>Level: <span tal:replace="context/course_level" /></h3>
+        <h4>Available in Semester(s):<tal:semesters tal:repeat="semester context/semester">
+             <span 
+              tal:replace="semester"/><tal:comma tal:condition="not:repeat/semester/end">,</tal:comma>
+             
+          
+        </tal:semesters>
+</h4>
+<h4>
+Prerequisites:
+</h4>
+<p tal:condition="not:context/prerequisites|nothing">
+None
+</p>
+
+<ul tal:repeat="prerequisite context/prerequisites|nothing">
+             <li><a href="" tal:attributes="href prerequisite/to_object/absolute_url">               <span 
+              tal:replace="prerequisite/to_object/Title"/></a>
+             </li>
+       </ul>
+       <h3>Availability</h3> 
+       <div tal:repeat="programme view/programme_refs">
+            <a href="" tal:attributes="href programme/absolute_url">
+            <span tal:replace="programme/Title" /> Programme
+           </a>
+       </div>
+
+</metal:main>
+
+</body>
+</html>
+
