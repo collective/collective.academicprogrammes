@@ -3,34 +3,28 @@ Integration Tests
 
 This is a DocTest file, using the Python doctest format.
 
-In an integration test, here's some of the globals you have to work with::
+In an integration test, here's the sandbox you have to work with::
 
-    >>> portal
+    >>> layer['portal']
     <PloneSite at /plone>
 
-    >>> portal_name
+    >>> layer['portal'].id
     'plone'
 
-    >>> folder
-    <ATFolder at /plone/Members/test_user_1_>
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> pc = getToolByName(layer['portal'], 'portal_catalog')
+    >>> [brain.getPath() for brain in pc()]
+    []
 
-    >>> user_name
+    >>> mtool = getToolByName(layer['portal'], 'portal_membership')
+    >>> mtool.getAuthenticatedMember().getId()
     'test_user_1_'
 
-    >>> user_password
-    'secret'
+    >>> mtool.getAuthenticatedMember().getRoles()
+    ['Member', 'Authenticated']
 
-    >>> user_role
-    'test_role_1_'
-
-    >>> app.REQUEST
+    >>> layer['request']
     <HTTPRequest, URL=http://nohost>
 
-    >>> app
+    >>> layer['app']
     <Application at >
-
-Now, let's demonstrate a failing test::
-
-    >>> 1 == 2  # deliberately failing test; fix me!
-    True
-
