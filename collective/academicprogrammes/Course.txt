@@ -1,39 +1,38 @@
 Course Tests
------------------
+------------
 
 This is a DocTest file, using the Python doctest format.
-
 
 Create a Course object and put it in a folder
 
     Create the object::
 
-    >>> from zope.component import createObject
-    >>> container = createObject('collective.academicprogrammes.course')
+    >>> from plone.app.testing import setRoles
+    >>> from plone.app.testing import TEST_USER_ID
+    >>> setRoles(layer['portal'], TEST_USER_ID, ['Contributor',])
 
-    Verify it's type::
+    >>> from plone.dexterity.utils import createContent
+    >>> container = createContent('collective.academicprogrammes.course',
+    ...                           course_name=u'Test Title',
+    ...                           course_code=u'000')
+
+    Verify its type::
 
     >>> container.portal_type
     'collective.academicprogrammes.course'
 
-    Give it a title::
+    Verify its title::
 
-    >>> container.setTitle('Test Title')
     >>> container.Title()
-    'Test Title'
+    ''
 
     Put it in our base folder::
 
     >>> from plone.dexterity.utils import addContentToContainer
-    >>> cobj = addContentToContainer(folder, container)
+    >>> cobj = addContentToContainer(layer['portal'], container)
 
     >>> cobj
-    <Course at /plone/Members/test_user_1_/test-title>
+    <Course at /plone/000-test-title>
 
-    >>> folder['test-title'].Title()
-    'Test Title'
-
-Now, let's demonstrate a failing test::
-
-    >>> 2 == 3  # Deliberately failing test; fix me!
-    True
+    >>> layer['portal']['000-test-title'].Title()
+    '000 Test Title'
